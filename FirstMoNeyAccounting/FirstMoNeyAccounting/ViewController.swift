@@ -7,8 +7,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController {
+    
+    
+    
+    //MARK: - realm
+    var realm = try! Realm()
+    
+     //MARK: - массив значений
+    var spendingArray: Results<Spending>!
+    
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,29 +30,50 @@ class ViewController: UIViewController {
     @IBOutlet var numberFromKeyboard: [UIButton]!
     
     var categoryName = ""
-    var displayValue = ""
+    var displayValue: Int = 1
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberFromKeyboard.forEach {$0.layer.cornerRadius = 10}
+        
+        numberFromKeyboard.forEach {$0.layer.cornerRadius = 25}
+        
         tableView.delegate = self
         tableView.dataSource =  self
+        //MARK: - заполнение массива при загрузке
+        spendingArray = realm.objects(Spending.self)
     }
     
-     
+    @IBAction func deleteAllButton(_ sender: UIBarButtonItem) {
+        
+        try! realm.write {
+            realm.deleteAll()
+            tableView.reloadData()
+            //spendingArray = []
+            }
+    }
+    
     
     @IBAction func numberPressed(_ sender: UIButton) {
+        
         let number = sender.currentTitle!
-        //проверка на 0 на дисплее
-        if stillTyping {
-            if displayLabel.text!.count < 12 {
-                displayLabel.text! += number
-            }
-            
+        if number == "0" && displayLabel.text == "0" {
+           
+            stillTyping = false
         }else{
-            displayLabel.text = number
-            stillTyping = true
+            if stillTyping {
+                if displayLabel.text!.count < 12 {
+                    displayLabel.text! += number
+                }
+                
+            }else{
+                displayLabel.text = number
+                stillTyping = true
+            }
         }
+        //проверка на 0 на дисплее
+        
     }
     
     
@@ -55,19 +87,33 @@ class ViewController: UIViewController {
     //удаление последнего символа
     @IBAction func removeLastButton(_ sender: Any) {
         if displayLabel.text != "0" {
-            let txt = displayLabel.text!.dropLast()
-            displayLabel.text = String(txt)
+            let text = String((displayLabel.text?.dropLast())!)
+            displayLabel.text = text
         }
     }
     
     @IBAction func categoryPressed(_ sender: UIButton) {
          
         categoryName = sender.currentTitle!
-        displayValue = displayLabel.text!
+        displayValue = Int(displayLabel.text!)!
         displayLabel.text = "0"
         stillTyping = false
         
-        print(categoryName  , displayValue)
+        //MARK: - создание и сохранение модели
+        
+        let value = Spending()
+        value.category = categoryName
+        value.cost = Int(displayValue)
+        
+        //spendingArray.append(value)
+        //print("value saved:",value)
+        //print(categoryName  , displayValue)
+        
+        //MARK: - realm WRITE
+        try! realm.write {
+            realm.add(value)
+        }
+        tableView.reloadData()
     }
     
     
@@ -75,16 +121,30 @@ class ViewController: UIViewController {
 
 }
 
- extension UIViewController: UITableViewDelegate,UITableViewDataSource {
+ extension ViewController: UITableViewDelegate,UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return spendingArray.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)  as! CustomCell
+
+        let spending = spendingArray[indexPath.row]
+        cell.setupcell(item: spending)
+        
+       
         return cell
         
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let edit = spendingArray[indexPath.row]
+            try! realm.write{
+                realm.delete(edit)}
+            //spendingArray.remove(at: indexPath.row)
+        }
+        tableView.reloadData()
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Display" translatesAutoresizingMaskIntoConstraints="NO" id="whO-CW-qbR">
-                                <rect key="frame" x="20" y="98" width="374" height="90.000000000000014"/>
+                                <rect key="frame" x="20" y="98" width="374" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="zlt-fu-566"/>
                                 </constraints>
@@ -361,7 +361,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="6yS-uM-06t"/>
                                                     <constraint firstAttribute="height" constant="44" id="IVt-Z0-esF"/>
                                                 </constraints>
-                                                <state key="normal" title="одежда" backgroundImage="womens-shirt">
+                                                <state key="normal" title="Одежда" image="Category_Одежда">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -372,7 +372,7 @@
                                                 <rect key="frame" x="0.0" y="52" width="50" height="28"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <state key="normal" title="одежда">
+                                                <state key="normal" title="Одежда">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
@@ -385,42 +385,30 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3J5-ts-Fv3">
-                                        <rect key="frame" x="130" y="0.0" width="50" height="80"/>
+                                        <rect key="frame" x="130" y="0.0" width="49" height="80"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h09-Ud-Kxz">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h09-Ud-Kxz">
+                                                <rect key="frame" x="0.0" y="0.0" width="49" height="72"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="57b-F8-RoP"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="8gd-Sb-iAy"/>
-                                                    <constraint firstAttribute="height" constant="44" id="cAk-Mg-6JZ"/>
-                                                </constraints>
-                                                <state key="normal" title="связь" backgroundImage="phonelink-ring">
+                                                <state key="normal" title="Связь" image="Category_Связь">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="categoryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zvg-8b-5aT"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy2-Xq-u9A">
-                                                <rect key="frame" x="0.0" y="52" width="50" height="28"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fy2-Xq-u9A">
+                                                <rect key="frame" x="0.0" y="80" width="49" height="0.0"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <state key="normal" title="связь">
+                                                <state key="normal" title="Связь">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="fy2-Xq-u9A" firstAttribute="height" secondItem="h09-Ud-Kxz" secondAttribute="height" multiplier="0.636364" id="Jdv-ft-OCB"/>
-                                            <constraint firstItem="fy2-Xq-u9A" firstAttribute="width" secondItem="h09-Ud-Kxz" secondAttribute="width" id="N59-Mk-QX1"/>
-                                            <constraint firstItem="fy2-Xq-u9A" firstAttribute="firstBaseline" secondItem="h09-Ud-Kxz" secondAttribute="baseline" constant="18.5" symbolType="layoutAnchor" id="Rch-eN-GSU"/>
-                                            <constraint firstItem="fy2-Xq-u9A" firstAttribute="width" secondItem="h09-Ud-Kxz" secondAttribute="height" multiplier="25:22" id="c1K-a3-STh"/>
-                                            <constraint firstItem="fy2-Xq-u9A" firstAttribute="top" secondItem="h09-Ud-Kxz" secondAttribute="bottom" constant="8" id="wHX-A4-9Wc"/>
-                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HDr-Xl-B4y">
-                                        <rect key="frame" x="195" y="0.0" width="50" height="80"/>
+                                        <rect key="frame" x="194" y="0.0" width="50" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DjB-BL-6CJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
@@ -429,7 +417,7 @@
                                                     <constraint firstAttribute="width" constant="50" id="Grq-nj-NtY"/>
                                                     <constraint firstAttribute="height" constant="44" id="TFn-iy-s3l"/>
                                                 </constraints>
-                                                <state key="normal" title="досуг" backgroundImage="dancing-party">
+                                                <state key="normal" title="Досуг" image="Category_Досуг">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -439,7 +427,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0n-kQ-zBL">
                                                 <rect key="frame" x="0.0" y="52" width="50" height="28"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="досуг">
+                                                <state key="normal" title="Досуг">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
@@ -452,7 +440,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="noL-JN-6Yi">
-                                        <rect key="frame" x="260" y="0.0" width="50" height="80"/>
+                                        <rect key="frame" x="259" y="0.0" width="50" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-mI-PvF">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
@@ -461,7 +449,7 @@
                                                     <constraint firstAttribute="height" constant="44" id="eGV-Jg-RVs"/>
                                                     <constraint firstAttribute="width" constant="50" id="x5h-uC-c68"/>
                                                 </constraints>
-                                                <state key="normal" title="красота" backgroundImage="Category_Красота">
+                                                <state key="normal" title="Красота" backgroundImage="Category_Красота">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -473,7 +461,7 @@
                                                 <rect key="frame" x="0.0" y="52" width="50" height="28"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                <state key="normal" title="красота">
+                                                <state key="normal" title="Красота">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
@@ -486,17 +474,17 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zmb-KH-GHW">
-                                        <rect key="frame" x="325" y="0.0" width="49" height="80"/>
+                                        <rect key="frame" x="324" y="0.0" width="50" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdl-Tw-1F0">
-                                                <rect key="frame" x="0.0" y="0.0" width="49" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Fdl-Tw-1F0" secondAttribute="height" multiplier="25:22" id="KWL-x8-n4G"/>
                                                     <constraint firstAttribute="height" constant="44" id="srY-Dj-FZu"/>
                                                     <constraint firstAttribute="width" constant="50" id="tRF-8y-jZ9"/>
                                                 </constraints>
-                                                <state key="normal" title="машина" backgroundImage="driving">
+                                                <state key="normal" title="Авто" image="Category_Авто">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -504,10 +492,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AY3-9H-vXG">
-                                                <rect key="frame" x="0.0" y="52" width="49" height="28"/>
+                                                <rect key="frame" x="0.0" y="52" width="50" height="28"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                <state key="normal" title="машина">
+                                                <state key="normal" title="Авто">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                             </button>
@@ -553,10 +541,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="FuckTheMoney" id="CbY-IL-sdz"/>
+                    <navigationItem key="navigationItem" title="FuckTheMoney" id="CbY-IL-sdz">
+                        <barButtonItem key="rightBarButtonItem" title="DeleteAll" id="5Qu-Pv-iaa">
+                            <connections>
+                                <action selector="deleteAllButton:" destination="BYZ-38-t0r" id="dhm-Ea-LHY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="displayLabel" destination="uvs-c9-8nV" id="yWP-ik-1iE"/>
-                        <outlet property="tableView" destination="abU-D8-N5D" id="1p4-Hh-YDb"/>
+                        <outlet property="tableView" destination="abU-D8-N5D" id="iQQ-rC-h7z"/>
                         <outletCollection property="numberFromKeyboard" destination="aw0-SB-vTV" collectionClass="NSMutableArray" id="Jt1-aX-joJ"/>
                         <outletCollection property="numberFromKeyboard" destination="Dfd-dB-HSa" collectionClass="NSMutableArray" id="bJa-BF-GvB"/>
                         <outletCollection property="numberFromKeyboard" destination="W28-Tv-i4f" collectionClass="NSMutableArray" id="uKw-yN-ufw"/>
@@ -633,13 +627,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Category_Авто" width="36" height="36"/>
+        <image name="Category_Досуг" width="36" height="36"/>
         <image name="Category_Еда" width="36" height="36"/>
         <image name="Category_Красота" width="36" height="36"/>
+        <image name="Category_Одежда" width="36" height="36"/>
+        <image name="Category_Связь" width="36" height="36"/>
         <image name="Display" width="291" height="49"/>
         <image name="cart.badge.minus" catalog="system" width="64" height="48"/>
-        <image name="dancing-party" width="500" height="500"/>
-        <image name="driving" width="512" height="512"/>
-        <image name="phonelink-ring" width="500" height="500"/>
-        <image name="womens-shirt" width="480" height="480"/>
     </resources>
 </document>
