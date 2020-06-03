@@ -180,7 +180,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xf-9R-qIM">
                                 <rect key="frame" x="20" y="196" width="165" height="261"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Лимит в месяц:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-WJ-X6q">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Лимит:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-WJ-X6q">
                                         <rect key="frame" x="8" y="8" width="149" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.96833848057633243" green="0.96833848057633243" blue="0.96833848057633243" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -227,6 +227,9 @@
                                         <state key="normal" title="Установить лимит">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="limitPressedButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YTh-1w-JSs"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="все расходы:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Mj-4G-BDz">
                                         <rect key="frame" x="8" y="212" width="149" height="21"/>
@@ -550,6 +553,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="displayLabel" destination="uvs-c9-8nV" id="yWP-ik-1iE"/>
+                        <outlet property="howManyCanSpend" destination="dDF-3R-7sH" id="tvO-fi-cGH"/>
+                        <outlet property="limithLabel" destination="cdt-aj-aKI" id="yiN-91-5zC"/>
+                        <outlet property="spendByCheck" destination="RRp-nQ-eHL" id="okg-5f-iwN"/>
                         <outlet property="tableView" destination="abU-D8-N5D" id="iQQ-rC-h7z"/>
                         <outletCollection property="numberFromKeyboard" destination="aw0-SB-vTV" collectionClass="NSMutableArray" id="Jt1-aX-joJ"/>
                         <outletCollection property="numberFromKeyboard" destination="Dfd-dB-HSa" collectionClass="NSMutableArray" id="bJa-BF-GvB"/>

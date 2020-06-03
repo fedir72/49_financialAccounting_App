@@ -29,6 +29,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet var numberFromKeyboard: [UIButton]!
     
+    @IBOutlet weak var limithLabel: UILabel!
+    @IBOutlet weak var howManyCanSpend: UILabel!
+    @IBOutlet weak var spendByCheck: UILabel!
+    
+    
     var categoryName = ""
     var displayValue: Int = 1
     
@@ -42,8 +47,65 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource =  self
         //MARK: - заполнение массива при загрузке
+        
         spendingArray = realm.objects(Spending.self)
+        
     }
+    //MARK: - кнопка алерт для установления лимита денег
+    
+    @IBAction func limitPressedButton(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Установить лимит", message: "Введите сумму и количество дней", preferredStyle: .alert)
+        alert.addTextField { (field) in
+            field.placeholder = "введите сумму"
+            field.keyboardType = .asciiCapableNumberPad
+        }
+        
+        alert.addTextField { (field) in
+            field.placeholder = "введите количество дней"
+            field.keyboardType = .asciiCapableNumberPad
+        }
+        
+        let alertINSTALL = UIAlertAction(title:  "установить", style: .default) { action in
+            let tfSum = alert.textFields?[0].text
+            self.limithLabel.text = tfSum
+            
+           
+            let tfDay = alert.textFields?[1].text
+            guard tfDay != "" else {return}
+            
+            if let day = tfDay {
+                let datenow = Date()
+                let lastDay: Date = datenow.addingTimeInterval(60*60*24*Double(day)!)
+                
+               //MARK: - запись лимита в базу
+                
+                let value = Limit()
+                value.limitSum = self.limithLabel.text!
+                value.limitDate = datenow as NSDate
+                value.limitLastDay = lastDay as NSDate
+                
+                let limit = self.realm.objects(Limit.self)//вссе лимиты базы
+                if limit.isEmpty == true {
+                    try! self.realm.write {
+                    self.realm.add(value)
+                    }
+                }else{//если не пусто перезаписываем
+                    try! self.realm.write {
+                    limit[0].limitSum = self.self.limithLabel.text!
+                    limit[0].limitDate = datenow as NSDate
+                    limit[0].limitLastDay = lastDay as NSDate
+                    }
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "выйти", style: .destructive, handler: nil)
+        alert.addAction(alertINSTALL)
+        alert.addAction(cancel)
+        present(alert,animated: true,completion: nil)
+    }
+    
+ 
     
     @IBAction func deleteAllButton(_ sender: UIBarButtonItem) {
         
@@ -105,21 +167,18 @@ class ViewController: UIViewController {
         value.category = categoryName
         value.cost = Int(displayValue)
         
-        //spendingArray.append(value)
-        //print("value saved:",value)
-        //print(categoryName  , displayValue)
-        
         //MARK: - realm WRITE
         try! realm.write {
             realm.add(value)
+            
         }
         tableView.reloadData()
     }
     
     
-    
+ }
+ 
 
-}
 
  extension ViewController: UITableViewDelegate,UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -17,5 +17,11 @@ class Spending: Object {
     
     }
 
+@objcMembers
+class Limit: Object {
+    dynamic var limitSum = ""
+    dynamic var limitDate = NSDate()
+    dynamic var limitLastDay = NSDate()
+}
 
 
