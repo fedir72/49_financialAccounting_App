@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var limithLabel: UILabel!
     @IBOutlet weak var howManyCanSpend: UILabel!
     @IBOutlet weak var spendByCheck: UILabel!
+    @IBOutlet weak var allSpending: UILabel!
     
     
     var categoryName = ""
@@ -42,6 +43,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+        
         numberFromKeyboard.forEach {$0.layer.cornerRadius = 25}
         
         tableView.delegate = self
@@ -49,6 +52,9 @@ class ViewController: UIViewController {
         //MARK: - заполнение массива при загрузке
         
         spendingArray = realm.objects(Spending.self)
+         leftLabels()//отображение суммы лимита
+        allSpendingSettings()
+  
         
     }
     //MARK: - кнопка алерт для установления лимита денег
@@ -68,12 +74,11 @@ class ViewController: UIViewController {
         
         let alertINSTALL = UIAlertAction(title:  "установить", style: .default) { action in
             let tfSum = alert.textFields?[0].text
-            self.limithLabel.text = tfSum
-            
            
             let tfDay = alert.textFields?[1].text
-            guard tfDay != "" else {return}
-            
+            guard tfDay != "" && tfSum != "" else {return}
+            self.limithLabel.text = tfSum
+
             if let day = tfDay {
                 let datenow = Date()
                 let lastDay: Date = datenow.addingTimeInterval(60*60*24*Double(day)!)
@@ -98,6 +103,7 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            self.leftLabels()
         }
         let cancel = UIAlertAction(title: "выйти", style: .destructive, handler: nil)
         alert.addAction(alertINSTALL)
@@ -134,7 +140,7 @@ class ViewController: UIViewController {
                 stillTyping = true
             }
         }
-        //проверка на 0 на дисплее
+       
         
     }
     
@@ -172,10 +178,49 @@ class ViewController: UIViewController {
             realm.add(value)
             
         }
+        self.leftLabels()
+        self.allSpendingSettings()
         tableView.reloadData()
     }
+    //MARK: - функция для назначения текста лейблам трат
+    func leftLabels() {
+        
+        let limit = self.realm.objects(Limit.self)
+        guard limit.isEmpty == false else {return}//проверка на наличие записи в базе данных
+        limithLabel.text = limit[0].limitSum
+        
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        
+        let firstday = limit[0].limitDate as Date
+        let lastday = limit[0].limitLastDay as Date
+        
+        let firstComponents = calendar.dateComponents([.year,.month,.day], from: firstday)
+        let lastComponents = calendar.dateComponents([.year,.month,.day], from: lastday)
+        //MARK: - даты начала и конца
+        let startdate = formatter.date(from: "\(firstComponents.year!)/\(firstComponents.month!)/\(firstComponents.day!) 00:00") as Any
+        let endtdate = formatter.date(from: "\(lastComponents.year!)/\(lastComponents.month!)/\(lastComponents.day!) 23:59") as Any
+        
+        let filtredlimit: Int = realm.objects(Spending.self).filter("self.date >= %@ && self.date <= %@", startdate , endtdate  ).sum(ofProperty: "cost")
+        //print("filteredlimit",filtredlimit)
+        
+         //MARK: - text for labels
+        spendByCheck.text = "\(filtredlimit)"
+        if let a = Int(limithLabel.text!) ,let b = Int(spendByCheck.text!) {
+            let c = a - b
+            howManyCanSpend.text = "\(c)"
     
+        }
+       
+    }
     
+    func allSpendingSettings() {
+                //MARK: - все траты и лейбл
+        let allSpend: Int = realm.objects(Spending.self).sum(ofProperty: "cost")
+           allSpending.text = "\(allSpend)"
+    }
+ 
  }
  
 
@@ -189,7 +234,7 @@ class ViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)  as! CustomCell
 
-        let spending = spendingArray[indexPath.row]
+        let spending = spendingArray.sorted(byKeyPath: "date", ascending: false)[indexPath.row]
         cell.setupcell(item: spending)
         
        
@@ -198,11 +243,13 @@ class ViewController: UIViewController {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let edit = spendingArray[indexPath.row]
+            let edit = spendingArray.sorted(byKeyPath: "date", ascending: false)[indexPath.row]
             try! realm.write{
                 realm.delete(edit)}
             //spendingArray.remove(at: indexPath.row)
         }
+        self.leftLabels()
+        self.allSpendingSettings()
         tableView.reloadData()
     }
     
