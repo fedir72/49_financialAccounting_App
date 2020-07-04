@@ -1,0 +1,6 @@
+framework module Pods_FirstMoNeyAccounting {
+  umbrella header "Pods-FirstMoNeyAccounting-umbrella.h"
+
+  export *
+  module * { export * }
+}
